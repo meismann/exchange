@@ -54,6 +54,20 @@ RSpec.describe Exchange::Money do
     end
   end
 
+  describe '#>' do
+    it "returns true when self's amount is greater than other's" do
+      expect(subject > subject / 2).to be true
+    end
+
+    it "returns false when self's amount is smaller than other's" do
+      expect(subject > subject * 2).to be false
+    end
+
+    it "returns false when self's amount is equal to other's" do
+      expect(subject > subject.clone).to be false
+    end
+  end
+
   describe '#convert_to' do
     it 'converts Money according to conversion rates' do
       expect(subject.convert_to('USD')).to eq Exchange::Money.new(55.5, 'USD')

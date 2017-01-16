@@ -50,6 +50,10 @@ module Exchange
       compare_amount_with other, &:<
     end
 
+    def >(other)
+      compare_amount_with other, &:>
+    end
+
     # Arithmetics
 
     def +(other)
