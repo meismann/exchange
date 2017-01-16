@@ -75,4 +75,10 @@ RSpec.describe Exchange::Money do
     end
   end
 
+  describe '#/' do
+    it "returns a new Money object, dividing self's value by argument" do
+      expect(subject / 4).to eq Exchange::Money.new(12.5, 'EUR')
+    end
+  end
+
 end
