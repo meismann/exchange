@@ -26,4 +26,10 @@ RSpec.describe Exchange::Money do
       expect(subject.currency).to eq 'EUR'
     end
   end
+
+  describe '#inspect' do
+    it 'returns a String formatted like "50.00 EUR"' do
+      expect(subject.inspect).to eq '50.00 EUR'
+    end
+  end
 end

@@ -15,5 +15,9 @@ module Exchange
       @currency = currency
     end
 
+    def inspect
+      "%.2f #{currency}" % [amount]
+    end
+
   end
 end
