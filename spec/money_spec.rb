@@ -63,7 +63,8 @@ RSpec.describe Exchange::Money do
     end
 
     it "preserves self's currency" do
-      expect((subject + other).currency).to eq 'EUR'
+      subject2 = Exchange::Money.new 5, 'Bitcoin'
+      expect((subject2 + other).currency).to eq 'Bitcoin'
     end
   end
 
@@ -71,10 +72,6 @@ RSpec.describe Exchange::Money do
     let(:other) { Exchange::Money.new 22.2, 'USD' }
     it "returns a new Money object, substracting other's from self's value" do
       expect(subject - other).to eq Exchange::Money.new(30.0, 'EUR')
-    end
-
-    it "preserves self's currency" do
-      expect((subject - other).currency).to eq 'EUR'
     end
   end
 

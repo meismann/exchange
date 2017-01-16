@@ -45,20 +45,21 @@ module Exchange
     # Arithmetics
 
     def +(other)
-      self.class.new(
-        base_currency_amount + other.convert_to(@@base_currency).amount,
-        @@base_currency
-      )
+      recalc_amount_with other.convert_to(@@base_currency).amount, &:+
     end
 
     def -(other)
-      self.class.new(
-        base_currency_amount - other.convert_to(@@base_currency).amount,
-        @@base_currency
-      )
+      recalc_amount_with other.convert_to(@@base_currency).amount, &:-
     end
 
     private
+
+    def recalc_amount_with(amount_in_base_currency_or_number)
+      self.class.new(
+        yield(base_currency_amount, amount_in_base_currency_or_number),
+        @@base_currency
+      ).convert_to(currency)
+    end
 
     def base_currency_amount
       amount / current_rate
