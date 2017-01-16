@@ -30,7 +30,7 @@ module Exchange
     end
 
     def ==(other)
-      base_currency_amount.round(2) == other.base_currency_amount.round(2)
+      base_currency_amount.round(2) == other.convert_to(@@base_currency).amount.round(2)
     end
 
     def convert_to(other_currency)
@@ -42,13 +42,11 @@ module Exchange
       )
     end
 
-    protected
+    private
 
     def base_currency_amount
       amount / current_rate
     end
-
-    private
 
     def rate_for(other_currency)
       return 1.0 if other_currency == @@base_currency
