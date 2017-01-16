@@ -56,6 +56,10 @@ module Exchange
       recalc_amount_with number, &:/
     end
 
+    def *(number)
+      recalc_amount_with number, &:*
+    end
+
     private
 
     def recalc_amount_with(amount_in_base_currency_or_number)
