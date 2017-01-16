@@ -39,4 +39,19 @@ RSpec.describe Exchange::Money do
     end
   end
 
+  describe '#convert_to' do
+    it 'converts Money according to conversion rates' do
+      expect(subject.convert_to('USD')).to eq Exchange::Money.new(55.5, 'USD')
+    end
+
+    it 'converts Money object to its own currency without error' do
+      expect(subject.convert_to('EUR')).to eq Exchange::Money.new(50.0, 'EUR')
+    end
+
+    it 'raises an error if given an unknown currency' do
+      expect{ subject.convert_to('XXX') }.to raise_error(
+        Exchange::UnknownCurrencyError, /XXX/
+      )
+    end
+  end
 end
