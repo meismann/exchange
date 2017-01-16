@@ -1,6 +1,7 @@
 RSpec.describe Exchange::Money do
 
   before do
+    Exchange::Money.test = true
     Exchange::Money.conversion_rates('EUR', {
         'USD'     => 1.11,
         'Bitcoin' => 0.0047

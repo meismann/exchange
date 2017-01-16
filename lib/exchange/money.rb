@@ -8,7 +8,12 @@ module Exchange
 
     class << self
 
+      attr_accessor :test
+
       def conversion_rates(base_currency, conversion_rates)
+        if ( class_variable_get(:@@base_currency) && ! test )
+          warn "#{self.to_s}.#{__method__} has just been initialized anew!"
+        end
         class_variable_set(:@@base_currency, base_currency)
         class_variable_set(:@@conversion_rates, conversion_rates)
       end
