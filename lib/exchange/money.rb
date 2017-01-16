@@ -29,10 +29,6 @@ module Exchange
       "%.2f #{currency}" % [amount]
     end
 
-    def ==(other)
-      base_currency_amount.round(2) == other.convert_to(@@base_currency).amount.round(2)
-    end
-
     def convert_to(other_currency)
       raise UnknownCurrencyError.new(other_currency) unless known?(other_currency)
 
@@ -40,6 +36,18 @@ module Exchange
         base_currency_amount * rate_for(other_currency),
         other_currency
       )
+    end
+
+    # Comparisons
+
+    def ==(other)
+      compare_amount_with other do |a, b|
+        a.round(2) == b.round(2)
+      end
+    end
+
+    def <(other)
+      compare_amount_with other, &:<
     end
 
     # Arithmetics
@@ -67,6 +75,10 @@ module Exchange
         yield(base_currency_amount, amount_in_base_currency_or_number),
         @@base_currency
       ).convert_to(currency)
+    end
+
+    def compare_amount_with(other)
+      yield(base_currency_amount, other.convert_to(@@base_currency).amount)
     end
 
     def base_currency_amount
