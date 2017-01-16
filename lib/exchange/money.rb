@@ -1,7 +1,7 @@
 module Exchange
   class Money
 
-    attr_reader :amount
+    attr_reader :amount, :currency
 
     class << self
 
@@ -12,6 +12,7 @@ module Exchange
 
     def initialize(amount, currency)
       @amount = amount.to_f
+      @currency = currency
     end
 
   end

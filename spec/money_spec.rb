@@ -20,4 +20,10 @@ RSpec.describe Exchange::Money do
       expect(subject.amount).to be 50.0
     end
   end
+
+  describe '#currency' do
+    it 'returns currency' do
+      expect(subject.currency).to eq 'EUR'
+    end
+  end
 end
