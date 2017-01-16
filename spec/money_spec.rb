@@ -32,4 +32,11 @@ RSpec.describe Exchange::Money do
       expect(subject.inspect).to eq '50.00 EUR'
     end
   end
+
+  describe '#==' do
+    it 'returns true when two Money are of the same value' do
+      expect(subject == Exchange::Money.new(55.5, 'USD')).to be true
+    end
+  end
+
 end
