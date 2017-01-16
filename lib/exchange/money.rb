@@ -42,6 +42,15 @@ module Exchange
       )
     end
 
+    # Arithmetics
+
+    def +(other)
+      self.class.new(
+        base_currency_amount + other.convert_to(@@base_currency).amount,
+        @@base_currency
+      )
+    end
+
     private
 
     def base_currency_amount

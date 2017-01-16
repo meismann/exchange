@@ -55,4 +55,16 @@ RSpec.describe Exchange::Money do
       )
     end
   end
+
+  describe '#+' do
+    let(:other) { Exchange::Money.new 22.2, 'USD' }
+    it "returns a new Money object, summing up self's and other's value" do
+      expect(subject + other).to eq Exchange::Money.new(70.0, 'EUR')
+    end
+
+    it "preserves self's currency" do
+      expect((subject + other).currency).to eq 'EUR'
+    end
+
+  end
 end
